@@ -10,7 +10,7 @@ from tkinter.filedialog import askopenfilename
 from google.cloud import vision
 from google.cloud.vision import types
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api_key.json"
-
+import metadata
 
 class ImageRecognition():
     def __init__(self):
@@ -34,6 +34,8 @@ class ImageRecognition():
             content = image_file.read()
 
         image = types.Image(content=content)
+
+        metadata.getTag(image)
 
         # Wykonuje wykrywanie etykiet obrazu
         response = client.label_detection(image=image)
