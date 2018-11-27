@@ -1,12 +1,14 @@
-from PIL import Image
-from PIL.ExifTags import TAGS
+from GPSPhoto import gpsphoto
 
-def getTag(img):
-    ret = {}
-    image = Image.open(str(img))
-    info = image._getexif()
-    for tag, value in info.items():
-        decoded = TAGS.get(tag, tag)
-        ret[decoded] = value
-        print(ret)
-    return ret
+def getTag(path):
+    metaData = gpsphoto.getGPSData(path)
+    geoLocalization = [0,0]
+
+    for tag in metaData.keys():
+        #print ("%s: %s" % (tag, metaData[tag]))
+        if tag == "Latitude":
+            geoLocalization[0] = metaData[tag]
+        if tag == "Longitude":
+            geoLocalization[1] = metaData[tag]
+
+    return geoLocalization

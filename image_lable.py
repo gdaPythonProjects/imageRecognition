@@ -37,6 +37,7 @@ class ImageRecognition():
         with io.open(file_name, 'rb') as image_file:
             content = image_file.read()
 
+        metadata.getTag(file_name)
         image = types.Image(content=content)
 
 
