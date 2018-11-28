@@ -11,6 +11,10 @@ from google.cloud import vision
 from google.cloud.vision import types
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api_key.json"
 
+import metadata
+
+
+from translator import *
 
 class ImageRecognition():
     def __init__(self):
@@ -33,11 +37,14 @@ class ImageRecognition():
         with io.open(file_name, 'rb') as image_file:
             content = image_file.read()
 
+        metadata.getTag(file_name)
         image = types.Image(content=content)
+
 
         # Wykonuje wykrywanie etykiet obrazu
         response = client.label_detection(image=image)
         self.labels = response.label_annotations
 
         for label in self.labels:
-            self.test = Label(text="{}".format(label.description), font=16).pack()
+            label.description = Translator.translate(self, label.description)
+            self.description = Label(text="{}".format(label.description), font=16).pack()

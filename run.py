@@ -1,7 +1,7 @@
-from gui import *
+import gui
 
-root = Tk()
-test = Application(master=root)
+root = gui.Tk()
+test = gui.Application(master=root)
 
 test.mainloop()
 
