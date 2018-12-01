@@ -1,0 +1,37 @@
+<CustomButton@Button>:
+    font_size:15
+    color: 0, 0, 0, 1
+    size: 50,25
+    background_normal: ''
+    background_color: .88, .88, .88, 1
+    size_hint: (0.2,0.1)
+<FloatLayout>:
+    CustomButton:
+        id: button1
+        text: "Wczytaj zdjecie"
+        pos_hint: {"x": 0.4, "y":0.85}
+
+    CustomButton:
+        id: button2
+        text: "Sprawdz co to jest"
+        pos_hint: {"x":0.4, "y":0.73}
+
+
+    CustomButton:
+        id: button3
+        text: "Zobacz gdzie zostalo zrobione zdjecie"
+        pos_hint: {"x": 0.3, "y":0.61}
+        size_hint:(0.4,0.1)
+
+
+
+
+
+
+    Label:
+        text:"Chcesz sprawdzic co jest na zdjeciu?"
+        pos_hint: {"x": 0.45, 'y':0.93}
+        size_hint: 0.1,0.1
+        color:1,1,1,1
+
+
