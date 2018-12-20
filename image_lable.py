@@ -9,20 +9,19 @@ from tkinter.filedialog import askopenfilename
 
 from google.cloud import vision
 from google.cloud.vision import types
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "api_key.json"
-
-import metadata
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = 'api_key.json'
 
 
-from translator import *
+class ImageRecognition:
 
-class ImageRecognition():
     def __init__(self):
         self.image_path = ""
+        self.labels = {}
 
     def get_image_path(self):
         Tk().withdraw()
         self.image_path = askopenfilename()
+        return self.image_path
 
     def image_labels(self):
         # Tworzy klienta
@@ -37,7 +36,6 @@ class ImageRecognition():
         with io.open(file_name, 'rb') as image_file:
             content = image_file.read()
 
-        metadata.getTag(file_name)
         image = types.Image(content=content)
 
 
@@ -45,6 +43,4 @@ class ImageRecognition():
         response = client.label_detection(image=image)
         self.labels = response.label_annotations
 
-        for label in self.labels:
-            label.description = Translator.translate(self, label.description)
-            self.description = Label(text="{}".format(label.description), font=16).pack()
+        return self.labels
